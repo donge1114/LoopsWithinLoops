@@ -1,292 +1,175 @@
 """
 This project demonstrates NESTED LOOPS (i.e., loops within loops)
-in the context of PRINTING on the CONSOLE.
+in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Enyi Dong.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
+
+import rosegraphics as rg
 
 
 def main():
-    """ Calls the other functions to test them. """
-    run_test_rectangle_of_stars()
-    run_test_triangle_of_stars()
-    run_test_decreasing_exclamation_marks()
-    run_test_alternating_brackets()
-    run_test_triangle_same_number_in_each_row()
-    run_test_triangle_all_numbers_in_each_row()
+    """ Calls the other functions to demonstrate them. """
+    # run_test_draw_L()
+    run_test_draw_wall_on_right()
 
 
-def run_test_rectangle_of_stars():
-    """ Tests the    rectangle_of_stars    function. """
-    print()
-    print('--------------------------------------------')
-    print('Testing the   RECTANGLE_OF_STARS   function:')
-    print('--------------------------------------------')
-
-    print('Test 1 of rectangle_of_stars: (3, 5)')
-    rectangle_of_stars(3, 5)
-
-    print('Test 2 of rectangle_of_stars: (4, 11)')
-    rectangle_of_stars(4, 11)
-
-    print('Test 3 of rectangle_of_stars: (6, 2)')
-    rectangle_of_stars(6, 2)
-
-
-def rectangle_of_stars(r, c):
+def run_test_draw_L():
     """
-    Prints a rectangle of stars (asterisks), with r rows and c columns.
-    For example, when r = 3 and c = 5:
-       *****
-       *****
-       *****
-    Preconditions:  r and c are non-negative integers.
+    Demonstrates nested loops in a TWO-DIMENSIONAL GRAPHICS example.
     """
+    width = 800
+    height = 600
+    title = 'Draw an L of circles.  Two tests'
+    window = rg.RoseWindow(width, height, title)
+
+    window.continue_on_mouse_click('Click to run Test 1.')
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    #  *** Unless your instructor directs you otherwise,
-    #      see the video
-    #          nested_loops_in_PRINTING.mp4
-    #      in Preparation for Session 18
-    #          ** NOW **
-    #      and follow along in that video as you do this problem.
-    #      (Pause the video when it completes this problem.)
-    #  ***
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
+    starting_point = rg.Point(50, 50)
     # ------------------------------------------------------------------
 
-
-def run_test_triangle_of_stars():
-    """ Tests the    triangle_of_stars    function. """
-    print()
-    print('-------------------------------------------')
-    print('Testing the   TRIANGLE_OF_STARS   function:')
-    print('-------------------------------------------')
-
-    print('Test 1 of triangle_of_stars: (5)')
-    triangle_of_stars(5)
-
-    print('Test 2 of triangle_of_stars: (1)')
-    triangle_of_stars(1)
-
-    print('Test 3 of triangle_of_stars: (3)')
-    triangle_of_stars(3)
-
-    print('Test 4 of triangle_of_stars: (6)')
-    triangle_of_stars(6)
-
-
-def triangle_of_stars(r):
-    """
-    Prints a triangle of stars (asterisks), with r rows.
-      -- The first row is 1 star,
-         the second is 2 stars,
-         the third is 3 stars, and so forth.
-    For example, when r = 5:
-       *
-       **
-       ***
-       ****
-       *****
-    Precondition:  r is a non-negative integer.
-    """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    #  *** Unless your instructor directs you otherwise,
-    #      see the video
-    #          nested_loops_in_PRINTING.mp4
-    #      in Preparation for Session 18
-    #          ** NOW **
-    #      and follow along in that video as you do this problem.
-    #      (Continue the video from where you paused it
-    #      in the previous problem.)
-    #  ***
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
+    # First L.
     # ------------------------------------------------------------------
+    radius = 10
+    starting_circle = rg.Circle(starting_point, radius)
+    green_circle = starting_circle.clone()
+    green_circle.fill_color = 'green'
+
+    draw_L(window, green_circle, 10, 5)
+    window.continue_on_mouse_click('Click to run Test 2.')
+
+    # ------------------------------------------------------------------
+    # Second L.
+    # ------------------------------------------------------------------
+    starting_circle.move_by(250, 100)
+    blue_circle = starting_circle.clone()
+    blue_circle.fill_color = 'blue'
+
+    window.continue_on_mouse_click('Click to run Test 2.')
+    draw_L(window, blue_circle, 6, 15)
+
+    window.close_on_mouse_click()
 
 
-def run_test_decreasing_exclamation_marks():
-    """ Tests the    decreasing_exclamation_marks    function. """
-    print()
-    print('----------------------------------------------------------')
-    print('Testing the   DECREASING_EXCLAMATION_MARKS   function:')
-    print('----------------------------------------------------------')
-
-    print('Test 1 of decreasing_exclamation_marks: (5, 2)')
-    decreasing_exclamation_marks(5, 2)
-
-    print('Test 2 of decreasing_exclamation_marks: (3, 1)')
-    decreasing_exclamation_marks(3, 1)
-
-    print('Test 3 of decreasing_exclamation_marks: (4, 4)')
-    decreasing_exclamation_marks(4, 4)
-
-    print('Test 4 of decreasing_exclamation_marks: (8, 6)')
-    decreasing_exclamation_marks(8, 6)
-
-
-def decreasing_exclamation_marks(m, n):
+def draw_L(window, circle, r, c):
     """
-    Prints exclamation marks:  m on the first row,
-    m-1 on the next row, m-2 on the next, etc, until n on the last row.
-    For example, when m = 5 and n = 2:
-       !!!!!
-       !!!!
-       !!!
-       !!
-    Precondition:  m and n are positive integers with m >= n.
+    See   L.pdf   in this project for pictures that may
+    help you better understand the following specification:
+
+    Draws an 'L' of circles on the given rg.RoseWindow.
+      The 'column' part of the L should have r rows and 3 columns.
+        (That is, it is r 'tall' and 3 'thick'.)
+      The 'shared corner' part of the L should be 3 x 3.
+      The 'row' part of the L should have c columns and 3 rows.
+        (That is, it is c 'long' and 3 'thick'.)
+
+      The given rg.Circle specifies:
+      - The position of the upper-left circle drawn and also
+      - The radius that all the circles have.
+      - The fill_color that all the circles have.
+    After drawing each circle, pauses briefly (0.1 second).
+
+    Preconditions:
+      :type window: rg.RoseWindow
+      :type circle: rg.Circle
+      :type r: int
+      :type c: int
+    and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
+    # DONE: 2. Implement and test this function.
+    #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    original_x = circle.center.x
+    original_y = circle.center.y
+    radius = circle.radius
+
+    x = original_x
+    y = original_y
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            x = x + (2 * radius)
+        y = y + 2 * radius
+        x = original_x
+
+    new_y = circle.center.y + radius*2*r
+    for k in range(3):
+        for j in range(c+3):
+            new_circle = rg.Circle(rg.Point(x, new_y), radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+            x = x + (2 * radius)
+        new_y += 2 * radius
+        x = original_x
+
+def run_test_draw_wall_on_right():
+    """ Tests the    draw_wall_on_right    function. """
+    # Tests 1 and 2 are ALREADY DONE (here).
+    window = rg.RoseWindow(550, 300, 'Wall on the right, Tests 1 and 2')
+
+    window.continue_on_mouse_click('Click to run Test 1.')
+
+    rectangle1 = rg.Rectangle(rg.Point(250, 30), rg.Point(250 + 30, 30 + 20))
+    draw_wall_on_right(rectangle1, 8, window)
+
+    window.continue_on_mouse_click('Click to run Test 2.')
+    rectangle2 = rg.Rectangle(rg.Point(470, 40), rg.Point(470 + 50, 40 + 50))
+    draw_wall_on_right(rectangle2, 4, window)
+
+    window.close_on_mouse_click()
 
 
-def run_test_alternating_brackets():
-    """ Tests the    alternating_brackets    function. """
-    print()
-    print('----------------------------------------------------------')
-    print('Testing the   ALTERNATING_BRACKETS   function:')
-    print('----------------------------------------------------------')
-
-    print('Test 1 of alternating_brackets: (5, 2)')
-    alternating_brackets(5, 2)
-
-    print('Test 2 of alternating_brackets: (3, 1)')
-    alternating_brackets(3, 1)
-
-    print('Test 3 of alternating_brackets: (4, 4)')
-    alternating_brackets(4, 4)
-
-    print('Test 4 of alternating_brackets: (8, 6)')
-    alternating_brackets(8, 6)
-
-
-def alternating_brackets(m, n):
+def draw_wall_on_right(rectangle, n, window):
     """
-    Prints alternating left/right square brackets:  m on the first row,
-    m-1 on the next row, m-2 on the next, etc, until n on the last row.
-    For example, when m = 5 and n = 2:
-       [][][
-       [][]
-       [][
-       []
-    Precondition:  m and n are positive integers with m >= n.
-    """
-    # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
-    # ------------------------------------------------------------------
+    See   Walls.pdf   in this project for pictures that may
+    help you better understand the following specification:
 
+    Draws an n x n RIGHT-justified triangle of rectangles
+    (1 rectangle in the top row, 2 in the next row, etc., until n rows)
+    on the given rg.RoseWindow.  The given rg.Rectangle specifies:
+      - The position of the upper-right rectangle drawn and also
+      - The width and height that all the rectangles have.
+    After drawing each rectangle, pauses briefly (0.1 second).
 
-def run_test_triangle_same_number_in_each_row():
-    """ Tests the    triangle_same_number_in_each_row    function. """
-    print()
-    print('----------------------------------------------------------')
-    print('Testing the   TRIANGLE_SAME_NUMBER_IN_EACH_ROW   function:')
-    print('----------------------------------------------------------')
-
-    print('Test 1 of triangle_same_number_in_each_row: (5)')
-    triangle_same_number_in_each_row(5)
-
-    print('Test 2 of triangle_same_number_in_each_row: (1)')
-    triangle_same_number_in_each_row(1)
-
-    print('Test 3 of triangle_same_number_in_each_row: (3)')
-    triangle_same_number_in_each_row(3)
-
-    print('Test 4 of triangle_same_number_in_each_row: (6)')
-    triangle_same_number_in_each_row(6)
-
-
-def triangle_same_number_in_each_row(r):
-    """
-    Prints a triangle of numbers, with r rows.
-    The first row is 1, the 2nd is 22, the 3rd is 333, etc.
-    For example, when r = 5:
-       1
-       22
-       333
-       4444
-       55555
-    Precondition:  r is a non-negative integer.
+    Preconditions:
+      :type rectangle: rg.Rectangle
+      :type n: int
+      :type window: rg.RoseWindow
+    and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
+    # DONE: 3. Implement and test this function.
+    #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    corner1_x = rectangle.corner_1.x
+    corner1_y = rectangle.corner_1.y
+    corner2_x = rectangle.corner_2.x
+    corner2_y = rectangle.corner_2.y
 
+    x1 = corner1_x
+    y1 = corner1_y
+    x2 = corner2_x
+    y2 = corner2_y
 
-def run_test_triangle_all_numbers_in_each_row():
-    """ Tests the    triangle_all_numbers_in_each_row    function. """
-    print()
-    print('----------------------------------------------------------')
-    print('Testing the   TRIANGLE_ALL_NUMBERS_IN_EACH_ROW   function:')
-    print('----------------------------------------------------------')
-
-    print('Test 1 of triangle_all_numbers_in_each_row: (5)')
-    triangle_all_numbers_in_each_row(5)
-
-    print('Test 2 of triangle_all_numbers_in_each_row: (1)')
-    triangle_all_numbers_in_each_row(1)
-
-    print('Test 3 of triangle_all_numbers_in_each_row: (3)')
-    triangle_all_numbers_in_each_row(3)
-
-    print('Test 4 of triangle_all_numbers_in_each_row: (6)')
-    triangle_all_numbers_in_each_row(6)
-
-
-def triangle_all_numbers_in_each_row(r):
-    """
-    Prints a triangle of numbers, with r rows.
-    The first row is 1, the 2nd is 12, the 3rd is 123, etc.
-    For example, when r = 5:
-       1
-       12
-       123
-       1234
-       12345
-    Precondition:  r is a non-negative integer.
-    """
-    # ------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
-    #          Some tests are already written for you (above).
-    #
-    # IMPLEMENTATION RESTRICTION:
-    #   ** You may NOT use string multiplication **
-    #   in this or the other problems in this module, as doing so
-    #   would defeat the goal of providing practice at loops within loops.
-    # ------------------------------------------------------------------
-
+    for k in range(n):
+        for j in range(k+1):
+            new_rect = rg.Rectangle(rg.Point(x1, y1),rg.Point(x2, y2))
+            new_rect.attach_to(window)
+            window.render(0.1)
+            x1 -= rectangle.get_width()
+            x2 -= rectangle.get_width()
+        y1 += rectangle.get_height()
+        y2 += rectangle.get_height()
+        x1 = corner1_x
+        x2 = corner2_x
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
